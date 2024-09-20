@@ -1,6 +1,26 @@
-const h1 = document.createElement('h1');
-h1.append("IT-KAMASUTRA");
+//DATA
+const playlists = [
+    {
+        id: 1,
+        title: 'Hip-Hop Hits',
+    },
+    {
+        id: 2,
+        title: 'Rap Hits',
+    },
+]
 
+//RENDER
 const root = document.getElementById('root');
 
-root.append(h1);
+for (let i = 0; i < playlists.length; i++) {
+    const playlist = playlists[i];
+    
+    const playlistElement = document.createElement('div');
+    const playlistTitleElement = document.createElement('h2');
+    playlistTitleElement.append(playlist.title);
+    playlistElement.append(playlistTitleElement);
+
+    root.append(playlistElement);
+}
+
