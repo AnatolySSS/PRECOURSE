@@ -3,33 +3,35 @@ const playlists = [
   {
     id: 1,
     title: "Hip-Hop Hits",
+    imageSource: './img/cardImage/image1.jpeg',
     tracks: [
       {
         artist: "Eminem",
         title: "Rap God",
         isHot: true,
-        imageSource: '/lesson-01/img/cardImage/trackList/track1.jpeg',
-        audioSource: '/lesson-01/audio/Eminem - Rap God.mp3',
+        imageSource: './img/cardImage/trackList/track1.jpeg',
+        audioSource: './audio/Eminem - Rap God.mp3',
       },
       {
         artist: "50 cent",
         title: "In da Club",
         isHot: false,
-        imageSource: '/lesson-01/img/cardImage/trackList/track2.jpeg',
-        audioSource: '/lesson-01/audio/50cent - In da club.mp3',
+        imageSource: './img/cardImage/trackList/track2.jpeg',
+        audioSource: './audio/50cent - In da club.mp3',
       },
     ],
   },
   {
     id: 2,
     title: "Rap Hits",
+    imageSource: './img/cardImage/image2.jpeg',
     tracks: [
       {
         artist: "Public Emeny",
         title: "Flight the power",
         isHot: true,
-        imageSource: '/lesson-01/img/cardImage/trackList/track3.jpeg',
-        audioSource: '/lesson-01/audio/Public Enemy - Fight The Power.mp3',
+        imageSource: './img/cardImage/trackList/track3.jpeg',
+        audioSource: './audio/Public Enemy - Fight The Power.mp3',
       },
     ],
   },
@@ -41,21 +43,27 @@ const root = document.getElementById("root");
 for (let i = 0; i < playlists.length; i++) {
   const playlist = playlists[i];
 
-  const playlistElement = document.createElement("div");
-  const playlistTitleElement = document.createElement("h2");
-  playlistTitleElement.append(playlist.title);
-
-  playlistElement.append(playlistTitleElement);
-
-  const tracksELement = TracksComponent(playlist.tracks);
-
-  playlistElement.append(tracksELement);
+  const playlistElement = PlaylistComponent(playlist);
 
   root.append(playlistElement);
 }
 
-function PlaylistComponent() {
-    
+function PlaylistComponent(playlist) {
+
+  const element = document.createElement("div");
+  const titleElement = document.createElement("h2");
+  const imgElement = document.createElement('img');
+
+  titleElement.append(playlist.title);
+
+  imgElement.src = playlist.imageSource;
+  imgElement.alt = 'playlistImage';
+
+  const tracksELement = TracksComponent(playlist.tracks);
+
+  element.append(titleElement, imgElement, tracksELement);
+
+  return element;
 }
 
 function TracksComponent(tracks) {
@@ -84,6 +92,7 @@ function TrackComponent(inputTrack) {
 function TrackImageComponent(imageSource) {
     const element = document.createElement('img');
     element.src = imageSource;
+    element.alt = 'image';
     return element
 }
 
